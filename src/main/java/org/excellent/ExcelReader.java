@@ -43,6 +43,8 @@ public class ExcelReader {
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
                 cells.put(cell.getAddress().toString(), cell);
+                // TODO: cell.getCachedFormulaResultType())
+                // TODO: cell.getRichStringCellValue()
             }
             System.out.println();
         }
