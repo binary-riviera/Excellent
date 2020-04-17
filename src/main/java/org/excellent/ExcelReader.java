@@ -15,6 +15,13 @@ import java.util.Iterator;
 
 public class ExcelReader {
 
+    /**
+     * Returns all the non-empty cells from a specified Excel .xlsx file.
+     *
+     * @param filename the filepath of the XLSX file to open
+     * @return a map from the cell coordinates to a non-empty Cell object
+     * @throws IOException unable to open file
+     */
     public HashMap<String, Cell> readFile(String filename) throws IOException {
         System.out.println(filename);
         File file = new File(filename);

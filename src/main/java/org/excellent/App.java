@@ -17,6 +17,11 @@ public class App {
         printCells(cells);
     }
 
+    /**
+     * Prints the coordinates and values of the specified cells Hashmap.
+     *
+     * @param cells the cells hashmap to print
+     */
     private static void printCells(HashMap<String, Cell> cells) {
         for (Map.Entry<String, Cell> entry : cells.entrySet()) {
             String k = entry.getKey();
