@@ -29,4 +29,9 @@ public class App {
             out.println("Key: " + k + " Value: " + v);
         }
     }
+    /*
+     * TODO: write a function that takes a hashmap of cells and turns it into a 2d array of cell values, this means we
+     *  can feed this easily to j2html.
+     *
+     */
 }

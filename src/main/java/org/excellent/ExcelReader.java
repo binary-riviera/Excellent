@@ -34,6 +34,7 @@ public class ExcelReader {
             System.out.println("Excel file opened successfully");
         } else {
             System.out.println("Error opening file");
+            throw new IOException();
         }
 
         // now we have the workbook open, let's get just the first sheet
