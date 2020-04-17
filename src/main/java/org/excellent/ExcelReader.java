@@ -48,6 +48,10 @@ public class ExcelReader {
                     case STRING:
                         System.out.print(cell.getStringCellValue() + "\t\t");
                         break;
+
+                    case FORMULA:
+                        System.out.print(cell.getCellFormula() + "\t\t");
+                        break;
                 }
             }
             System.out.println();
