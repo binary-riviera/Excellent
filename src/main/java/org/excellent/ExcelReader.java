@@ -9,12 +9,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 
 
 public class ExcelReader {
 
-    public void readFile(String filename) throws IOException {
+    public HashMap<String, Cell> readFile(String filename) throws IOException {
         System.out.println(filename);
         File file = new File(filename);
         FileInputStream fIP = new FileInputStream(file);
@@ -33,29 +34,19 @@ public class ExcelReader {
         Iterator<Row> rowIterator = spreadsheet.iterator();
         XSSFRow row;
 
+        HashMap<String, Cell> cells = new HashMap<>(); // this is what we'll store the cell values in
+
         while (rowIterator.hasNext()) {
             row = (XSSFRow) rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
 
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-
-                switch (cell.getCellType()) {
-                    case NUMERIC:
-                        System.out.print(cell.getNumericCellValue() + "\t\t");
-                        break;
-
-                    case STRING:
-                        System.out.print(cell.getStringCellValue() + "\t\t");
-                        break;
-
-                    case FORMULA:
-                        System.out.print(cell.getCellFormula() + "\t\t");
-                        break;
-                }
+                cells.put(cell.getAddress().toString(), cell);
             }
             System.out.println();
         }
         fIP.close();
+        return cells;
     }
 }
