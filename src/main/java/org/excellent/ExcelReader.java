@@ -2,6 +2,7 @@ package org.excellent;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -22,7 +23,7 @@ public class ExcelReader {
      * @return a map from the cell coordinates to a non-empty Cell object
      * @throws IOException unable to open file
      */
-    public HashMap<String, Cell> readFile(String filename) throws IOException {
+    public HashMap<CellAddress, Cell> readFile(String filename) throws IOException {
         System.out.println(filename);
         File file = new File(filename);
         FileInputStream fIP = new FileInputStream(file);
@@ -42,7 +43,7 @@ public class ExcelReader {
         Iterator<Row> rowIterator = spreadsheet.iterator();
         XSSFRow row;
 
-        HashMap<String, Cell> cells = new HashMap<>(); // this is what we'll store the cell values in
+        HashMap<CellAddress, Cell> cells = new HashMap<>(); // this is what we'll store the cell values in
 
         while (rowIterator.hasNext()) {
             row = (XSSFRow) rowIterator.next();
@@ -50,7 +51,7 @@ public class ExcelReader {
 
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-                cells.put(cell.getAddress().toString(), cell);
+                cells.put(cell.getAddress(), cell);
                 // TODO: cell.getCachedFormulaResultType())
                 // TODO: cell.getRichStringCellValue()
             }

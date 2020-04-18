@@ -1,6 +1,7 @@
 package org.excellent;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.util.CellAddress;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         out.println("Hello, World");
         ExcelReader reader = new ExcelReader();
-        HashMap<String, Cell> cells;
+        HashMap<CellAddress, Cell> cells;
         cells = reader.readFile("static_files/Example.xlsx");
         printCells(cells);
     }
@@ -22,16 +23,12 @@ public class App {
      *
      * @param cells the cells hashmap to print
      */
-    private static void printCells(HashMap<String, Cell> cells) {
-        for (Map.Entry<String, Cell> entry : cells.entrySet()) {
-            String k = entry.getKey();
+    private static void printCells(HashMap<CellAddress, Cell> cells) {
+        for (Map.Entry<CellAddress, Cell> entry : cells.entrySet()) {
+            CellAddress k = entry.getKey();
             Cell v = entry.getValue();
             out.println("Key: " + k + " Value: " + v);
         }
     }
-    /*
-     * TODO: write a function that takes a hashmap of cells and turns it into a 2d array of cell values, this means we
-     *  can feed this easily to j2html.
-     *
-     */
+
 }
