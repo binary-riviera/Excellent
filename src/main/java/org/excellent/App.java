@@ -16,6 +16,9 @@ public class App {
         HashMap<CellAddress, Cell> cells;
         cells = reader.readFile("static_files/Example.xlsx");
         printCells(cells);
+
+        HtmlCreator h = new HtmlCreator(cells);
+
     }
 
     /**
