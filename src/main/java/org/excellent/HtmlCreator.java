@@ -13,12 +13,7 @@ public class HtmlCreator {
 
         String[][] grid = createGrid(this.cells);
 
-        for (String[] strings : grid) {
-            for (int j = 0; j < grid[0].length; j++) {
-                System.out.print("'" + strings[j] + "'\t\t");
-            }
-            System.out.println();
-        }
+
     }
 
     private static String[][] createGrid(HashMap<CellAddress, Cell> cells) {
@@ -47,6 +42,15 @@ public class HtmlCreator {
         }
 
         return grid;
+    }
+
+    private void printGrid(String[][] grid) {
+        for (String[] strings : grid) {
+            for (int j = 0; j < grid[0].length; j++) {
+                System.out.print("'" + strings[j] + "'\t\t");
+            }
+            System.out.println();
+        }
     }
 }
 /*
