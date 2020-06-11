@@ -5,15 +5,16 @@ import org.apache.poi.ss.util.CellAddress;
 
 import java.util.HashMap;
 
+import static j2html.TagCreator.body;
+import static j2html.TagCreator.h1;
+
 public class HtmlCreator {
-    HashMap<CellAddress, Cell> cells;
+    String[][] cells;
 
     public HtmlCreator(HashMap<CellAddress, Cell> cells) {
-        this.cells = cells;
-
-        String[][] grid = createGrid(this.cells);
-
-
+        this.cells = createGrid(cells);
+        printGrid(this.cells);
+        generateHTML(this.cells);
     }
 
     private static String[][] createGrid(HashMap<CellAddress, Cell> cells) {
@@ -52,9 +53,11 @@ public class HtmlCreator {
             System.out.println();
         }
     }
+
+
+    public void generateHTML(String[][] grid) {
+        System.out.println(body(
+                h1("Hello, World!")
+        ).render());
+    }
 }
-/*
- * TODO: write a function that takes a hashmap of cells and turns it into a 2d array of cell values, this means we
- *  can feed this easily to j2html.
- *
- */
