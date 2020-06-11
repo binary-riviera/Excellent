@@ -1,12 +1,13 @@
 package org.excellent;
 
+import j2html.tags.ContainerTag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellAddress;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
-import static j2html.TagCreator.body;
-import static j2html.TagCreator.h1;
+import static j2html.TagCreator.*;
 
 public class HtmlCreator {
     String[][] cells;
@@ -14,7 +15,7 @@ public class HtmlCreator {
     public HtmlCreator(HashMap<CellAddress, Cell> cells) {
         this.cells = createGrid(cells);
         printGrid(this.cells);
-        generateHTML(this.cells);
+        String foo = generateHTML(this.cells);
     }
 
     private static String[][] createGrid(HashMap<CellAddress, Cell> cells) {
@@ -55,9 +56,16 @@ public class HtmlCreator {
     }
 
 
-    public void generateHTML(String[][] grid) {
-        System.out.println(body(
-                h1("Hello, World!")
-        ).render());
+    public String generateHTML(String[][] grid) {
+        // TODO: add a filename field to put in the title of the html document.
+        return html(
+                table(attrs("#table-excel"), tbody(
+                        Arrays.stream(grid)
+                                .map(row ->
+                                        tr(
+                                                Arrays.stream(row).map(cell -> td(cell)).toArray(ContainerTag[]::new)
+                                        )
+                                ).toArray(ContainerTag[]::new)
+                ))).render();
     }
 }
