@@ -1,5 +1,6 @@
 package org.excellent;
 
+import j2html.TagCreator;
 import j2html.tags.ContainerTag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellAddress;
@@ -16,6 +17,7 @@ public class HtmlCreator {
         this.cells = createGrid(cells);
         printGrid(this.cells);
         String foo = generateHTML(this.cells);
+        System.out.println(foo);
     }
 
     private static String[][] createGrid(HashMap<CellAddress, Cell> cells) {
@@ -62,9 +64,7 @@ public class HtmlCreator {
                 table(attrs("#table-excel"), tbody(
                         Arrays.stream(grid)
                                 .map(row ->
-                                        tr(
-                                                Arrays.stream(row).map(cell -> td(cell)).toArray(ContainerTag[]::new)
-                                        )
+                                        tr(Arrays.stream(row).map(TagCreator::td).toArray(ContainerTag[]::new))
                                 ).toArray(ContainerTag[]::new)
                 ))).render();
     }
