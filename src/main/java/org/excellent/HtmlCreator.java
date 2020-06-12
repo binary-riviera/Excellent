@@ -5,6 +5,8 @@ import j2html.tags.ContainerTag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellAddress;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -67,5 +69,15 @@ public class HtmlCreator {
                                         tr(Arrays.stream(row).map(TagCreator::td).toArray(ContainerTag[]::new))
                                 ).toArray(ContainerTag[]::new)
                 ))).render();
+    }
+
+    public void writeHTMLFile(String html, String filepath) {
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(filepath), StandardCharsets.UTF_8))) {
+            writer.write(html);
+        } catch (IOException e) {
+            System.out.println("A file error existed");
+            e.printStackTrace();
+        }
     }
 }
