@@ -5,8 +5,10 @@ import j2html.tags.ContainerTag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellAddress;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -20,6 +22,7 @@ public class HtmlCreator {
         printGrid(this.cells);
         String foo = generateHTML(this.cells);
         System.out.println(foo);
+        writeHTMLFile(foo, "zumba.html", true);
     }
 
     private static String[][] createGrid(HashMap<CellAddress, Cell> cells) {
@@ -71,13 +74,23 @@ public class HtmlCreator {
                 ))).render();
     }
 
-    public void writeHTMLFile(String html, String filepath) {
+    public void writeHTMLFile(String html, String filename, Boolean openAfter) {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(filepath), StandardCharsets.UTF_8))) {
+                new FileOutputStream(filename), StandardCharsets.UTF_8))) {
             writer.write(html);
-        } catch (IOException e) {
+
+            // open file in browser
+            if (openAfter == true && Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(Paths.get(filename).toAbsolutePath().toUri());
+            }
+        } catch (FileNotFoundException e) {
             System.out.println("A file error existed");
             e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("An IO error existed");
+            e.printStackTrace();
         }
+
+
     }
 }
