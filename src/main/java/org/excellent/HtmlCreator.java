@@ -25,6 +25,12 @@ public class HtmlCreator {
         writeHTMLFile(foo, "zumba.html", true);
     }
 
+    /**
+     * Converts a Hashmap of Cells to a 2d array of strings.
+     *
+     * @param cells the grid of Cells to convert
+     * @return a 2d array of strings, each one the text contents of the cell
+     */
     private static String[][] createGrid(HashMap<CellAddress, Cell> cells) {
         int maxColumn = 0;
         int maxRow = 0;
@@ -53,6 +59,11 @@ public class HtmlCreator {
         return grid;
     }
 
+    /**
+     * Prints the cell grid out
+     *
+     * @param grid the cell content strings to print
+     */
     private void printGrid(String[][] grid) {
         for (String[] strings : grid) {
             for (int j = 0; j < grid[0].length; j++) {
@@ -63,6 +74,12 @@ public class HtmlCreator {
     }
 
 
+    /**
+     * Converts a grid of cells to a HTML table
+     *
+     * @param grid the grid of cell contents to convert
+     * @return the generated HTML, represented as a String
+     */
     public String generateHTML(String[][] grid) {
         // TODO: add a filename field to put in the title of the html document.
         return html(
@@ -74,6 +91,14 @@ public class HtmlCreator {
                 ))).render();
     }
 
+
+    /**
+     * Writes a HTML string to a specified file
+     *
+     * @param html      the HTML string to write
+     * @param filename  the file to write to
+     * @param openAfter whether to open a browser with the file afterwards
+     */
     public void writeHTMLFile(String html, String filename, Boolean openAfter) {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(filename), StandardCharsets.UTF_8))) {
@@ -90,7 +115,5 @@ public class HtmlCreator {
             System.out.println("An IO error existed");
             e.printStackTrace();
         }
-
-
     }
 }
